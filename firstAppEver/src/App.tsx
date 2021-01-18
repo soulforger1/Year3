@@ -1,13 +1,8 @@
 import React from 'react';
-import {AppearanceProvider} from 'react-native-appearance';
-import SwitchedApp from './components/switchedAppearence';
+import {GestureHandler} from './screens/gestureHandler';
 
 const App = () => {
-  return (
-    <AppearanceProvider>
-      <SwitchedApp />
-    </AppearanceProvider>
-  );
+  return <GestureHandler />;
 };
 
 export default App;

@@ -6,11 +6,11 @@ const SwitchedApp: React.FC<any> = () => {
   const [state, setState] = useState('');
   const [isEnabled, setIsEnabled] = useState(false);
   const color = useColorScheme();
-  const [colorScheme, setColorScheme] = useState(color);
+  const [isDark, setIsDark] = useState(color === 'dark');
 
   const styles = StyleSheet.create({
     main: {
-      backgroundColor: colorScheme === 'dark' ? '#121212' : '#FFFFFF',
+      backgroundColor: isDark ? '#121212' : '#FFFFFF',
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
@@ -18,23 +18,23 @@ const SwitchedApp: React.FC<any> = () => {
     text: {
       fontSize: 20,
       fontWeight: 'bold',
-      color: colorScheme === 'dark' ? '#FFFFFF' : '#121212',
+      color: isDark ? '#FFFFFF' : '#121212',
     },
   });
 
   useEffect(() => {
-    if (colorScheme === 'dark') setState('🌙');
+    if (isDark) setState('🌙');
     else setState('🌞');
-  }, [colorScheme]);
+  }, [isDark]);
 
   useEffect(() => {
-    if (color === 'dark') setColorScheme('dark');
-    else setColorScheme('light');
+    if (color === 'dark') setIsDark(true);
+    else setIsDark(false);
   }, [color]);
 
   useEffect(() => {
-    if (colorScheme === 'dark') setColorScheme('light');
-    else setColorScheme('dark');
+    if (isDark) setIsDark(false);
+    else setIsDark(true);
   }, [isEnabled]);
 
   return (
