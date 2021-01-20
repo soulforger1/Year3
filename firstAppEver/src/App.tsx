@@ -1,9 +1,10 @@
 import React from 'react';
 import {GestureHandler} from './screens/gestureHandler';
-import {PanGesture, SwipeableList} from './screens/';
+import {Appearance, Form, PanGesture, SwipeableList} from './screens/';
+import { SwitchedApp } from './components';
 
 const App = () => {
-  return <SwipeableList />;
+  return <Form />;
 };
 
 export default App;

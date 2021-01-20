@@ -7,9 +7,10 @@ import {
   Text,
   View,
 } from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import {InputLocal} from '../components/inputs';
 
-const App = () => {
+export const Form = () => {
   const name = (text: string) => {
     const regex = /^[A-Za-z]+$/;
     var color = '';
@@ -45,6 +46,11 @@ const App = () => {
         <InputLocal label="Your Name" validate={name}></InputLocal>
         <InputLocal label="Your Age" validate={age}></InputLocal>
         <InputLocal label="Your Email"></InputLocal>
+        <TouchableOpacity>
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>Submit</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -61,6 +67,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'black',
   },
+  button: {
+    width: 200,
+    height: 50,
+    backgroundColor: 'green',
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 });
-
-export default App;

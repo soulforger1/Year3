@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {AppearanceProvider, useColorScheme} from 'react-native-appearance';
 
-const App = () => {
+export const Appearance = () => {
   const [state, setState] = useState('');
   const colorScheme = useColorScheme();
 
@@ -32,5 +32,3 @@ const App = () => {
     </AppearanceProvider>
   );
 };
-
-export default App;

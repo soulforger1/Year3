@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, Switch, Text, View} from 'react-native';
 import {useColorScheme} from 'react-native-appearance';
 
-const SwitchedApp: React.FC<any> = () => {
+export const SwitchedApp: React.FC<any> = () => {
   const [state, setState] = useState('');
   const [isEnabled, setIsEnabled] = useState(false);
   const color = useColorScheme();
@@ -51,5 +51,3 @@ const SwitchedApp: React.FC<any> = () => {
     </SafeAreaView>
   );
 };
-
-export default SwitchedApp;
