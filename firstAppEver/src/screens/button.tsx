@@ -13,7 +13,7 @@ import {
   View,
 } from 'react-native';
 
-const App = () => {
+const App: React.FC<any> = () => {
   const [count, setCount] = useState(1);
 
   const alert = () =>

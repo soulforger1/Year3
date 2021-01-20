@@ -1,9 +1,9 @@
 import React from 'react';
 import {GestureHandler} from './screens/gestureHandler';
-import { PanGesture } from './screens/panGesture';
+import {PanGesture, SwipeableList} from './screens/';
 
 const App = () => {
-  return <PanGesture />;
+  return <SwipeableList />;
 };
 
 export default App;

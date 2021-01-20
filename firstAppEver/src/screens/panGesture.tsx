@@ -1,28 +1,40 @@
-import React from 'react';
-import {Animated, Image, Pressable, StyleSheet, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {Animated, Image, StyleSheet, View} from 'react-native';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
 const loveIcon = require('../assets/love.png');
 
 export const PanGesture = () => {
   const translateX = new Animated.Value(0);
   const translateY = new Animated.Value(0);
+  const translate = new Animated.ValueXY();
 
   const dragg = (event: any) => {
     if (event.nativeEvent.state === State.ACTIVE) {
       const translationX = event.nativeEvent.translationX;
       const translationY = event.nativeEvent.translationY;
-      translateX.setValue(translationX);
-      translateY.setValue(translationY);
-    // console.log(event.nativeEvent)
+      translate.x.setValue(translationX);
+      translate.y.setValue(translationY);
     }
   };
+
+  const _onGestureEvent = Animated.event(
+    [
+      {
+        nativeEvent: {
+          translationX: translate.x,
+          translateY: translate.y,
+        },
+      },
+    ],
+    {useNativeDriver: true},
+  );
 
   return (
     <View style={styles.main}>
       <PanGestureHandler onGestureEvent={(event) => dragg(event)}>
         <Animated.View
           style={{
-            transform: [{translateX: translateX}, {translateY: translateY}],
+            transform: [{translateX: translate.x}, {translateY: translate.y}],
           }}>
           <Image style={styles.icon} source={loveIcon}></Image>
         </Animated.View>
