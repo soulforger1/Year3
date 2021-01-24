@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {Post} from '../components/post';
 
-const App = () => {
+export const MovieList = () => {
   const state = [
     {
       title: 'Wonder Woman 1984',
@@ -100,5 +100,3 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
 });
-
-export default App;

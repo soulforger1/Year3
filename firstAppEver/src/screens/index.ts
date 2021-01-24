@@ -6,3 +6,5 @@ export * from './movieList';
 export * from './panGesture';
 export * from './swipeableMovieList';
 export * from './animated';
+export * from './linear';
+export * from './animatedImage';

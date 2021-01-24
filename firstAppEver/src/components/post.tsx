@@ -1,12 +1,41 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Animated, Image, StyleSheet, Text, View} from 'react-native';
 const like = require('../assets/love.png');
 
 export const Post: React.FC<any> = ({title, rate, poster, date}) => {
+  const index = new Animated.Value(0);
+  const rotate = index.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+  });
+  const scale = index.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+  });
+
+  Animated.timing(index, {
+    toValue: 1,
+    duration: 1000,
+    useNativeDriver: true,
+  }).start();
+
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{uri: poster}}></Image>
-      <View style={styles.infos}>
+      <Animated.Image
+        style={[
+          styles.image,
+          {
+            transform: [{rotate}],
+          },
+        ]}
+        source={{uri: poster}}></Animated.Image>
+      <Animated.View
+        style={[
+          styles.infos,
+          {
+            transform: [{scale}],
+          },
+        ]}>
         <View style={{justifyContent: 'center', flex: 1}}>
           <Text style={styles.title}>{title}</Text>
         </View>
@@ -14,7 +43,7 @@ export const Post: React.FC<any> = ({title, rate, poster, date}) => {
           <Text style={styles.rate}>{rate}</Text>
           <Text style={styles.date}>{date}</Text>
         </View>
-      </View>
+      </Animated.View>
       <View style={styles.emojiContainer}>
         <Image style={styles.emoji} source={like}></Image>
       </View>
