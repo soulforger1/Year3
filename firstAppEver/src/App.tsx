@@ -13,7 +13,7 @@ import {
 import {SwitchedApp} from './components';
 
 const App = () => {
-  return <MovieList />;
+  return <Linear />;
 };
 
 export default App;

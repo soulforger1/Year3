@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {Animated, Dimensions, Easing, StyleSheet, View} from 'react-native';
-import {TranslateX, Diagonal} from '../components/';
+import {TranslateX, Diagonal, Sin} from '../components/';
 // safeArea ashiglasan bol 60 iig hashad bolno
 const {height, width} = Dimensions.get('window');
 
@@ -12,6 +12,7 @@ export const Linear = () => {
     <View style={styles.main}>
       {/* <TranslateX /> */}
       {/* <Diagonal /> */}
+      <Sin />
     </View>
   );
 };
