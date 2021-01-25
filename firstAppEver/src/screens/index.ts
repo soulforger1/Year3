@@ -8,3 +8,4 @@ export * from './swipeableMovieList';
 export * from './animated';
 export * from './linear';
 export * from './animatedImage';
+export * from './movieSlider';

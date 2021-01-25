@@ -10,9 +10,9 @@ const {height, width} = Dimensions.get('window');
 export const Linear = () => {
   return (
     <View style={styles.main}>
-      {/* <TranslateX /> */}
+      <TranslateX />
       {/* <Diagonal /> */}
-      <Sin />
+      {/* <Sin /> */}
     </View>
   );
 };
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: 'black',
-    // justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'center',
+    // alignItems: 'center',
   },
 });

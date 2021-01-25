@@ -9,11 +9,12 @@ import {
   PanGesture,
   SwipeableList,
   MovieList,
+  MovieSlider,
 } from './screens/';
 import {SwitchedApp} from './components';
 
 const App = () => {
-  return <Linear />;
+  return <MovieSlider />;
 };
 
 export default App;
