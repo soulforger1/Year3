@@ -1,12 +1,26 @@
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
 import {SliderCard} from '../components';
-import {movieData} from './movieData';
+import firestore from '@react-native-firebase/firestore';
 
 export const MovieSlider = () => {
+  const [datas, setDatas] = useState([]);
+
+  firestore()
+    .collection('animeRank')
+    .onSnapshot((res) => {
+      const data = res.docs.map((cur) => {
+        return cur.data();
+      });
+      setDatas(data);
+    });
+
   const scrollX = new Animated.Value(0);
 
+  // const onScroll = Animated.event(
+  //   [{nativeEvent: {contentOffset: {y: scrollY}}}],
+  //   {useNativeDriver: true},
+  // );
   const onScroll = Animated.event(
     [{nativeEvent: {contentOffset: {x: scrollX}}}],
     {useNativeDriver: false},
@@ -14,16 +28,16 @@ export const MovieSlider = () => {
 
   return (
     <View style={styles.main}>
-      <FlatList
-        data={movieData}
-        renderItem={({item, index}) => (
+      <Animated.FlatList
+        data={datas}
+        renderItem={({index, item}) => (
           <SliderCard {...{index, item, scrollX}} />
         )}
-        keyExtractor={(_, index) => index + ''}
+        keyExtractor={(_, index) => index.toString()}
+        onScroll={onScroll}
         pagingEnabled
         horizontal
         showsHorizontalScrollIndicator={false}
-        onScroll={onScroll}
       />
     </View>
   );

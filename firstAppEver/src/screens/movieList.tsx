@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -8,9 +8,20 @@ import {
   View,
 } from 'react-native';
 import {Post} from '../components/post';
-import {movieData} from './movieData';
+import firestore from '@react-native-firebase/firestore';
 
 export const MovieList = () => {
+  const [datas, setDatas] = useState([]);
+
+  firestore()
+    .collection('animeRank')
+    .onSnapshot((res) => {
+      const data = res.docs.map((cur) => {
+        return cur.data();
+      });
+      setDatas(data);
+    });
+
   return (
     <ScrollView>
       <StatusBar barStyle="light-content" />
@@ -18,7 +29,7 @@ export const MovieList = () => {
         <SafeAreaView style={styles.movieContainer}>
           <Text style={styles.movie}>Movies</Text>
         </SafeAreaView>
-        {movieData.map((cur, index) => (
+        {datas.map((cur, index) => (
           <Post
             key={index}
             title={cur.title}

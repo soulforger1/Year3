@@ -1,26 +1,19 @@
 import React, {useEffect} from 'react';
-import {
-  Animated,
-  Dimensions,
-  Image,
-  ImageBackground,
-  StyleSheet,
-} from 'react-native';
-const {height, width} = Dimensions.get('window');
+import {Animated, Dimensions, ImageBackground, StyleSheet} from 'react-native';
+const {width} = Dimensions.get('window');
 
 export const SliderCard: React.FC<any> = ({item, index, scrollX}) => {
   const position = Animated.subtract(index * 230, scrollX);
 
   const scale = position.interpolate({
     inputRange: [-230, 0, width],
-    outputRange: [0.5, 1, 0.5],
-    extrapolate: 'clamp',
+    outputRange: [0.3, 1, 0.3],
   });
 
   useEffect(() => {
-    if (index === 0) {
-      console.log(scrollX);
-    }
+    // if (index === 2) {
+    console.log(scrollX, index * 230, position);
+    // }
   }, []);
 
   return (
@@ -30,7 +23,7 @@ export const SliderCard: React.FC<any> = ({item, index, scrollX}) => {
       blurRadius={30}>
       <Animated.Image
         source={{uri: item.poster}}
-        style={[styles.poster, {transform: [{scale}]}]}
+        style={[styles.poster, {transform: [{scale: 1}]}]}
       />
     </ImageBackground>
   );

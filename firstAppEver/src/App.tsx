@@ -14,7 +14,7 @@ import {
 import {SwitchedApp} from './components';
 
 const App = () => {
-  return <MovieSlider />;
+  return <MovieList />;
 };
 
 export default App;
