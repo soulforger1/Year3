@@ -9,3 +9,4 @@ export * from './animated';
 export * from './linear';
 export * from './animatedImage';
 export * from './movieSlider';
+export * from './contacts';

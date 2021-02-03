@@ -4,8 +4,6 @@ import {PanGestureHandler, State} from 'react-native-gesture-handler';
 const loveIcon = require('../assets/love.png');
 
 export const PanGesture = () => {
-  const translateX = new Animated.Value(0);
-  const translateY = new Animated.Value(0);
   const translate = new Animated.ValueXY();
 
   const dragg = (event: any) => {
