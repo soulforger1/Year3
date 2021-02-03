@@ -1,10 +1,10 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 import {SliderCard} from '../components';
 import firestore from '@react-native-firebase/firestore';
 
 export const MovieSlider = () => {
-  const [datas, setDatas] = useState([]);
+  const [datas, setDatas] = useState<object>([]);
 
   firestore()
     .collection('animeRank')
@@ -15,15 +15,11 @@ export const MovieSlider = () => {
       setDatas(data);
     });
 
-  const scrollX = new Animated.Value(0);
+  const scrollX = useRef(new Animated.Value(0)).current;
 
-  // const onScroll = Animated.event(
-  //   [{nativeEvent: {contentOffset: {y: scrollY}}}],
-  //   {useNativeDriver: true},
-  // );
   const onScroll = Animated.event(
     [{nativeEvent: {contentOffset: {x: scrollX}}}],
-    {useNativeDriver: false},
+    {useNativeDriver: true},
   );
 
   return (
@@ -31,7 +27,7 @@ export const MovieSlider = () => {
       <Animated.FlatList
         data={datas}
         renderItem={({index, item}) => (
-          <SliderCard {...{index, item, scrollX}} />
+          <SliderCard index={index} item={item} scrollX={scrollX} />
         )}
         keyExtractor={(_, index) => index.toString()}
         onScroll={onScroll}

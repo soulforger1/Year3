@@ -2,19 +2,20 @@ import React, {useEffect} from 'react';
 import {Animated, Dimensions, ImageBackground, StyleSheet} from 'react-native';
 const {width} = Dimensions.get('window');
 
-export const SliderCard: React.FC<any> = ({item, index, scrollX}) => {
-  const position = Animated.subtract(index * 230, scrollX);
+interface Props {
+  item: object;
+  index: number;
+  scrollX: any;
+}
+
+export const SliderCard: React.FC<Props> = ({item, index, scrollX}) => {
+  const position = Animated.subtract(index * width, scrollX);
 
   const scale = position.interpolate({
-    inputRange: [-230, 0, width],
+    inputRange: [width * -1, 0, width],
     outputRange: [0.3, 1, 0.3],
+    extrapolate: 'clamp',
   });
-
-  useEffect(() => {
-    // if (index === 2) {
-    console.log(scrollX, index * 230, position);
-    // }
-  }, []);
 
   return (
     <ImageBackground
@@ -23,7 +24,7 @@ export const SliderCard: React.FC<any> = ({item, index, scrollX}) => {
       blurRadius={30}>
       <Animated.Image
         source={{uri: item.poster}}
-        style={[styles.poster, {transform: [{scale: 1}]}]}
+        style={[styles.poster, {transform: [{scale: scale}]}]}
       />
     </ImageBackground>
   );
