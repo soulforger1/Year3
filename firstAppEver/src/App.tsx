@@ -19,7 +19,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 const alex = require('./assets/alex.png');
 
 const App = () => {
-  return <MovieSlider />;
+  return <MovieList />;
 };
 
 export default App;

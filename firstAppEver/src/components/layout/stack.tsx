@@ -20,6 +20,14 @@ interface Props {
   width?: number | string;
   gap: number | string;
   children: any;
+  justify?:
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly';
+  align?: 'stretch' | 'flex-start' | 'flex-end' | 'center' | 'baseline';
 }
 
 export const Stack: React.FC<Props> = ({children, ...props}) => {
@@ -27,6 +35,8 @@ export const Stack: React.FC<Props> = ({children, ...props}) => {
     main: {
       height: props.height,
       width: props.width,
+      justifyContent: props.justify,
+      alignItems: props.align,
     },
   });
 

@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {Post} from '../components/post';
 import firestore from '@react-native-firebase/firestore';
+import {Background, Stack} from '../components/layout';
 
 export const MovieList = () => {
   const [datas, setDatas] = useState([]);
@@ -25,19 +26,21 @@ export const MovieList = () => {
   return (
     <ScrollView>
       <StatusBar barStyle="light-content" />
-      <View style={styles.main}>
+      <Background height="100%" width="100%" color="#343434" align="center">
         <SafeAreaView style={styles.movieContainer}>
           <Text style={styles.movie}>Movies</Text>
         </SafeAreaView>
-        {datas.map((cur, index) => (
-          <Post
-            key={index}
-            title={cur.title}
-            rate={cur.rate}
-            poster={cur.poster}
-            date={cur.releaseDate}></Post>
-        ))}
-      </View>
+        <Stack gap={20} width="100%" align="center">
+          {datas.map((cur, index) => (
+            <Post
+              key={index}
+              title={cur.title}
+              rate={cur.rate}
+              poster={cur.poster}
+              date={cur.releaseDate}></Post>
+          ))}
+        </Stack>
+      </Background>
     </ScrollView>
   );
 };

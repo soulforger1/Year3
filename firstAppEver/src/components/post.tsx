@@ -1,53 +1,25 @@
 import React from 'react';
 import {Animated, Image, StyleSheet, Text, View} from 'react-native';
+import {Background, Padding, Stack} from './layout';
 const like = require('../assets/love.png');
 
 export const Post: React.FC<any> = ({title, rate, poster, date}) => {
-  const index = new Animated.Value(0);
-  const rotate = index.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '360deg'],
-  });
-  const scale = index.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, 1],
-  });
-
-  Animated.timing(index, {
-    toValue: 1,
-    duration: 1000,
-    useNativeDriver: true,
-  }).start();
-
   return (
-    <View style={styles.container}>
-      <Animated.Image
-        style={[
-          styles.image,
-          {
-            transform: [{rotate}],
-          },
-        ]}
-        source={{uri: poster}}></Animated.Image>
-      <Animated.View
-        style={[
-          styles.infos,
-          {
-            transform: [{scale}],
-          },
-        ]}>
+    <Animated.View style={styles.container}>
+      <Background height={150} width={110} url={poster}></Background>
+      <Padding width="34%" align="center" left={16} top={20}>
         <View style={{justifyContent: 'center', flex: 1}}>
           <Text style={styles.title}>{title}</Text>
         </View>
-        <View style={{alignItems: 'center', flexDirection: 'row', flex: 1}}>
+        <Stack gap={0}>
           <Text style={styles.rate}>{rate}</Text>
           <Text style={styles.date}>{date}</Text>
-        </View>
-      </Animated.View>
+        </Stack>
+      </Padding>
       <View style={styles.emojiContainer}>
         <Image style={styles.emoji} source={like}></Image>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 
@@ -56,17 +28,8 @@ const styles = StyleSheet.create({
     width: '87%',
     height: 150,
     backgroundColor: '#444444',
-    marginBottom: 20,
     borderRadius: 10,
     flexDirection: 'row',
-  },
-  image: {
-    width: 110,
-    borderRadius: 10,
-  },
-  infos: {
-    flex: 1,
-    paddingLeft: 16,
   },
   title: {
     fontSize: 19,
@@ -83,7 +46,6 @@ const styles = StyleSheet.create({
   },
   emojiContainer: {
     flex: 1,
-    // backgroundColor: 'white'
     justifyContent: 'center',
     alignItems: 'center',
   },

@@ -9,6 +9,15 @@ interface Props {
   opacity?: number;
   resizeMode?: 'cover' | 'contain' | 'stretch' | 'repeat' | 'center';
   overflow?: 'visible' | 'hidden';
+  borderRadius?: number;
+  justify?:
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly';
+  align?: 'stretch' | 'flex-start' | 'flex-end' | 'center' | 'baseline';
 }
 
 export const Background: React.FC<Props> = ({children, ...props}) => {
@@ -20,6 +29,9 @@ export const Background: React.FC<Props> = ({children, ...props}) => {
       opacity: props.opacity,
       resizeMode: props.resizeMode,
       overflow: props.overflow,
+      borderRadius: props.borderRadius,
+      justifyContent: props.justify,
+      alignItems: props.align,
     },
   });
 
