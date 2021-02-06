@@ -11,6 +11,7 @@ import {
   MovieList,
   MovieSlider,
   Contacts,
+  Main,
 } from './screens/';
 import {SwitchedApp} from './components';
 import {Image, View} from 'react-native';
@@ -20,7 +21,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 const alex = require('./assets/alex.png');
 
 const App = () => {
-  return <Contacts />;
+  return <Main />;
 };
 
 export default App;
