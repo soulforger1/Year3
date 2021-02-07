@@ -4,12 +4,12 @@ import {SliderCard} from '../components';
 import firestore from '@react-native-firebase/firestore';
 
 export const MovieSlider = () => {
-  const [datas, setDatas] = useState<object>([]);
+  const [datas, setDatas] = useState([]);
 
   firestore()
     .collection('animeRank')
     .onSnapshot((res) => {
-      const data = res.docs.map((cur) => {
+      const data: any = res.docs.map((cur) => {
         return cur.data();
       });
       setDatas(data);
@@ -19,7 +19,7 @@ export const MovieSlider = () => {
 
   const onScroll = Animated.event(
     [{nativeEvent: {contentOffset: {x: scrollX}}}],
-    {useNativeDriver: true},
+    {useNativeDriver: false},
   );
 
   return (

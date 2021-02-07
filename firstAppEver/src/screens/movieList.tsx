@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {
+  Animated,
   SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
@@ -9,39 +9,45 @@ import {
 } from 'react-native';
 import {Post} from '../components/post';
 import firestore from '@react-native-firebase/firestore';
-import {Background, Stack} from '../components/layout';
+import {Background} from '../components/layout';
 
-export const MovieList = () => {
-  const [datas, setDatas] = useState([]);
+interface Props {
+  navigation?: any;
+}
+
+export const MovieList: React.FC<Props> = ({navigation}) => {
+  const [datas, setDatas] = useState<any>([]);
+  const scrollY = new Animated.Value(0);
 
   firestore()
     .collection('animeRank')
     .onSnapshot((res) => {
-      const data = res.docs.map((cur) => {
+      const data: any = res.docs.map((cur) => {
         return cur.data();
       });
       setDatas(data);
     });
 
+  const onScroll = Animated.event(
+    [{nativeEvent: {contentOffset: {y: scrollY}}}],
+    {useNativeDriver: true},
+  );
+
   return (
-    <ScrollView>
+    <View>
       <StatusBar barStyle="light-content" />
       <Background height="100%" width="100%" color="#343434" align="center">
-        <SafeAreaView style={styles.movieContainer}>
-          <Text style={styles.movie}>Movies</Text>
-        </SafeAreaView>
-        <Stack gap={20} width="100%" align="center">
-          {datas.map((cur, index) => (
-            <Post
-              key={index}
-              title={cur.title}
-              rate={cur.rate}
-              poster={cur.poster}
-              date={cur.releaseDate}></Post>
-          ))}
-        </Stack>
+        <Animated.FlatList
+          data={datas}
+          renderItem={({index, item}) => (
+            <Post item={item} index={index} scrollY={scrollY} />
+          )}
+          keyExtractor={(_, index) => index.toString()}
+          onScroll={onScroll}
+          showsVerticalScrollIndicator={false}
+        />
       </Background>
-    </ScrollView>
+    </View>
   );
 };
 
@@ -51,15 +57,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#343434',
-  },
-  movieContainer: {
-    height: 130,
-    width: '100%',
-  },
-  movie: {
-    fontSize: 40,
-    fontWeight: 'bold',
-    color: 'white',
-    marginLeft: 20,
   },
 });

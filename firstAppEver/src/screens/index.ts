@@ -11,3 +11,5 @@ export * from './animatedImage';
 export * from './movieSlider';
 export * from './contacts';
 export * from './test/main';
+export * from './popUp';
+export * from './movieListNavigator';
