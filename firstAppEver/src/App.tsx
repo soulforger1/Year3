@@ -18,11 +18,11 @@ import {SwitchedApp} from './components';
 import {Image, View} from 'react-native';
 import {Background, Margin, Padding, Stack} from './components/layout';
 import {ScrollView} from 'react-native-gesture-handler';
-
+import {BottomTabs} from './navigation/bottomTabs';
 const alex = require('./assets/alex.png');
 
 const App = () => {
-  return <MovieListNavigator />;
+  return <BottomTabs />;
 };
 
 export default App;
